@@ -26,10 +26,27 @@
       </a>
     </div>
 
+    <!-- Page Header template -->
+    <script id="header-template" type="text/x-handlebars-template">
+      <h1 class="ui header">{{pageTitle}}</h1>
+    </script>
+
+    <!-- Loader Template -->
+    <script id="loader-template" type="text/x-handlebars-template">
+      <h1 class="ui header">{{pageTitle}}</h1>
+      <div class="ui segment" style="height:350px">
+        <p></p>
+        <div class="ui active dimmer">
+          <div class="ui text loader">Loading</div>
+        </div>
+      </div>
+    </script>
+
     <!-- Currency Rates Template -->
     <script id="rates-template" type="text/x-handlebars-template">
+      <h1 class="ui header">Currency Rates</h1>
       <div class="ui segment">
-        <table class="ui celled table">
+        <table class="ui celled table inverted">
           <thead>
             <tr>
               <th>Code</th>
@@ -47,6 +64,9 @@
         </table>
       </div>
     </script>
+
+    <!-- Page Header -->
+    <div id="header"></div>
 
     <!-- Page content -->
     <div id="app"></div>

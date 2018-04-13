@@ -2,6 +2,7 @@ window.addEventListener('load', () => {
   const el = $('#app');
 
   // Compile Handlebar Templates
+  const loaderTemplate = Handlebars.compile($('#loader-template').html());
   const ratesTemplate = Handlebars.compile($('#rates-template').html());
 
   // Instantiate api handler
@@ -18,6 +19,8 @@ window.addEventListener('load', () => {
   });
 
   router.add('/', async () => {
+    // Display loader first
+    el.html(loaderTemplate({ pageTitle: 'Currency Rates' }));
     // Load Currency Rates
     const response = await api.get('/rates');
     const { rates } = response.data;
@@ -35,7 +38,6 @@ window.addEventListener('load', () => {
   });
 
   router.navigateTo(window.location.pathname);
-
 
   // Highlight Active Menu on Load
   const link = $(`a[href$='${window.location.pathname}']`);
