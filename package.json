@@ -1,0 +1,13 @@
+{
+  "name": "single-page-application",
+  "version": "1.0.0",
+  "description": "This is a demo project for beginners showing them how to build a Single Page Application without using a popular framework such as React, Angular, Vue, Ember or Backbone.js.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "Michael Wanyoike",
+  "license": "MIT"
+}
