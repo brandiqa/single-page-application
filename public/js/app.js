@@ -4,6 +4,8 @@ window.addEventListener('load', () => {
   // Compile Handlebar Templates
   const loaderTemplate = Handlebars.compile($('#loader-template').html());
   const ratesTemplate = Handlebars.compile($('#rates-template').html());
+  const exchangeTemplate = Handlebars.compile($('#exchange-template').html());
+  const historicalTemplate = Handlebars.compile($('#historical-template').html());
 
   // Instantiate api handler
   const api = axios.create({
@@ -23,18 +25,20 @@ window.addEventListener('load', () => {
     el.html(loaderTemplate({ pageTitle: 'Currency Rates' }));
     // Load Currency Rates
     const response = await api.get('/rates');
-    const { rates } = response.data;
+    const { base, date, rates } = response.data;
     // Display Rates Table
-    const html = ratesTemplate({ rates });
+    const html = ratesTemplate({ base, date, rates });
     el.html(html);
   });
 
   router.add('/exchange', () => {
-    el.html('Exchange Page');
+    const html = exchangeTemplate();
+    el.html(html);
   });
 
   router.add('/historical', () => {
-    el.html('Historical Page');
+    const html = historicalTemplate();
+    el.html(html);
   });
 
   router.navigateTo(window.location.pathname);

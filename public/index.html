@@ -22,18 +22,14 @@
         Exchange Rates
       </a>
       <a class="item" href="/historical">
-        Historical Data
+        Historical Rates
       </a>
     </div>
-
-    <!-- Page Header template -->
-    <script id="header-template" type="text/x-handlebars-template">
-      <h1 class="ui header">{{pageTitle}}</h1>
-    </script>
 
     <!-- Loader Template -->
     <script id="loader-template" type="text/x-handlebars-template">
       <h1 class="ui header">{{pageTitle}}</h1>
+      <hr>
       <div class="ui segment" style="height:350px">
         <p></p>
         <div class="ui active dimmer">
@@ -45,28 +41,51 @@
     <!-- Currency Rates Template -->
     <script id="rates-template" type="text/x-handlebars-template">
       <h1 class="ui header">Currency Rates</h1>
-      <div class="ui segment">
-        <table class="ui celled table inverted">
-          <thead>
-            <tr>
-              <th>Code</th>
-              <th>Rate</th>
-            </tr>
-          </thead>
-          <tbody>
-            {{#each rates}}
-            <tr>
-              <td>{{@key}}</td>
-              <td>{{this}}</td>
-            </tr>
-            {{/each}}
-          </tbody>
-        </table>
+      <hr>
+      <div class="ui horizontal list">
+        <div class="item">
+          <i class="money calendar alternate outline icon"></i>
+          <div class="content">
+            <div class="ui sub header">Date</div>
+            <span>{{date}}</span>
+          </div>
+        </div>
+        <div class="item">
+          <i class="money bill alternate outline icon"></i>
+          <div class="content">
+            <div class="ui sub header">Base</div>
+            <span>{{base}}</span>
+          </div>
+        </div>
       </div>
+
+      <table class="ui celled table inverted">
+        <thead>
+          <tr>
+            <th>Code</th>
+            <th>Rate</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each rates}}
+          <tr>
+            <td>{{@key}}</td>
+            <td>{{this}}</td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
     </script>
 
-    <!-- Page Header -->
-    <div id="header"></div>
+    <script id="exchange-template" type="text/x-handlebars-template">
+      <h1 class="ui header">Exchange Rate</h1>
+      <hr>
+    </script>
+
+    <script id="historical-template" type="text/x-handlebars-template">
+      <h1 class="ui header">Historical Rates</h1>
+      <hr>
+    </script>
 
     <!-- Page content -->
     <div id="app"></div>
