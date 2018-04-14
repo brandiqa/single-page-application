@@ -26,15 +26,25 @@ window.addEventListener('load', () => {
     },
   });
 
+  const showError = (error) => {
+    const { title, message } = error.response.data;
+    const html = errorTemplate({ color: 'red', title, message });
+    el.html(html);
+  };
+
   router.add('/', async () => {
     // Display loader first
     el.html(loaderTemplate({ pageTitle: 'Currency Rates' }));
-    // Load Currency Rates
-    const response = await api.get('/rates');
-    const { base, date, rates } = response.data;
-    // Display Rates Table
-    const html = ratesTemplate({ base, date, rates });
-    el.html(html);
+    try {
+      // Load Currency Rates
+      const response = await api.get('/rates');
+      const { base, date, rates } = response.data;
+      // Display Rates Table
+      const html = ratesTemplate({ base, date, rates });
+      el.html(html);
+    } catch (error) {
+      showError(error);
+    }
   });
 
   router.add('/exchange', () => {
