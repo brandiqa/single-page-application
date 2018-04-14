@@ -1,6 +1,6 @@
 require('dotenv').config();
 const express = require('express');
-const { getRates } = require('./lib/fixer-service');
+const { getRates, getSymbols } = require('./lib/fixer-service');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -35,6 +35,18 @@ app.get('/api/rates', async (req, res) => {
     errorHandler(error, req, res);
   }
 });
+
+// Symbols
+app.get('/api/symbols', async (req, res) => {
+  try {
+    const data = await getSymbols();
+    res.setHeader('Content-Type', 'application/json');
+    res.send(data);
+  } catch (error) {
+    errorHandler(error, req, res);
+  }
+});
+
 
 // Redirect all traffic to index.html
 app.use((req, res) => res.sendFile(`${__dirname}/public/index.html`));

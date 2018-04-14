@@ -47,9 +47,18 @@ window.addEventListener('load', () => {
     }
   });
 
-  router.add('/exchange', () => {
-    const html = exchangeTemplate();
-    el.html(html);
+  router.add('/exchange', async () => {
+    // Display loader first
+    el.html(loaderTemplate({ pageTitle: 'Exchange Rates' }));
+    try {
+      // Load Symbols
+      const response = await api.get('/symbols');
+      const { symbols } = response.data;
+      const html = exchangeTemplate({ symbols });
+      el.html(html);
+    } catch (error) {
+      showError(error);
+    }
   });
 
   router.add('/historical', () => {
