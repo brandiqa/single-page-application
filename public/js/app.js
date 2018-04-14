@@ -54,9 +54,10 @@ window.addEventListener('load', () => {
     const amount = $('#amount').val();
     // Send post data to express(proxy) server
     try {
-      const response = await api.post('/convert', { from, to, amount });
-      const { result } = response.data;
-      $('#result').val(result);
+      const response = await api.post('/convert', { from, to });
+      const { rate } = response.data;
+      const result = rate * amount;
+      $('#result').html(`${to} ${result}`);
     } catch (error) {
       showError(error);
     } finally {
