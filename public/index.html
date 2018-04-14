@@ -93,6 +93,24 @@
     <script id="exchange-template" type="text/x-handlebars-template">
       <h1 class="ui header">Exchange Rate</h1>
       <hr>
+      <br>
+      <div class="ui form">
+        <div class="two fields">
+          <div class="field">
+            <label>From</label>
+            <select name="from" id="from">
+              <option value="">Select Currency</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>To</label>
+            <select name="to" id="to">
+              <option value="">Select Currency</option>
+            </select>
+          </div>
+        </div>
+        <div class="ui submit button">Convert</div>
+      </div>
     </script>
 
     <script id="historical-template" type="text/x-handlebars-template">
