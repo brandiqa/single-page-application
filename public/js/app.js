@@ -47,6 +47,14 @@ window.addEventListener('load', () => {
     }
   });
 
+  const convertRatesHandler = () => {
+    if ($('.ui.form').form('is valid')) {
+      console.log('form is valid');
+    }
+    // Prevent page from submitting to server
+    return false;
+  };
+
   router.add('/exchange', async () => {
     // Display loader first
     el.html(loaderTemplate({ pageTitle: 'Exchange Rates' }));
@@ -56,6 +64,16 @@ window.addEventListener('load', () => {
       const { symbols } = response.data;
       const html = exchangeTemplate({ symbols });
       el.html(html);
+      // Specify Form Validation Rules
+      $('.ui.form').form({
+        fields: {
+          from: 'empty',
+          to: 'empty',
+          amount: 'decimal',
+        },
+      });
+      // Specify Submit Handler
+      $('.submit').click(convertRatesHandler);
     } catch (error) {
       showError(error);
     }

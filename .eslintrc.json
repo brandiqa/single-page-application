@@ -10,6 +10,6 @@
     "globals": {
       "Router": false,
       "axios": false,
-      "Handlebars":false
+      "Handlebars": false
     }
 }
