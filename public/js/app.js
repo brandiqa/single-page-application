@@ -2,6 +2,7 @@ window.addEventListener('load', () => {
   const el = $('#app');
 
   // Compile Handlebar Templates
+  const errorTemplate = Handlebars.compile($('#error-template').html());
   const loaderTemplate = Handlebars.compile($('#loader-template').html());
   const ratesTemplate = Handlebars.compile($('#rates-template').html());
   const exchangeTemplate = Handlebars.compile($('#exchange-template').html());
@@ -16,7 +17,12 @@ window.addEventListener('load', () => {
   const router = new Router({
     mode: 'history',
     page404: (path) => {
-      el.html(`/${path} Page not found`);
+      const html = errorTemplate({
+        color: 'yellow',
+        title: 'Error 404 - Page NOT Found!',
+        message: `The path '/${path}' does not exist on this site`,
+      });
+      el.html(html);
     },
   });
 
