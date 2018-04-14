@@ -47,12 +47,34 @@ window.addEventListener('load', () => {
     }
   });
 
+  const getConversionResults = async () => {
+    // Extract form data
+    const from = $('#from').val();
+    const to = $('#to').val();
+    const amount = $('#amount').val();
+    // Send post data to express(proxy) server
+    try {
+      const response = await api.post('/convert', { from, to, amount });
+      const { result } = response.data;
+      $('#result').val(result);
+    } catch (error) {
+      showError(error);
+    } finally {
+      $('#result-segment').removeClass('loading');
+    }
+  };
+
   const convertRatesHandler = () => {
     if ($('.ui.form').form('is valid')) {
-      console.log('form is valid');
+      // hide error message
+      $('.ui.error.message').hide();
+      // Post to express server
+      $('#result-segment').addClass('loading');
+      getConversionResults();
+      // Prevent page from submitting to server
+      return false;
     }
-    // Prevent page from submitting to server
-    return false;
+    return true;
   };
 
   router.add('/exchange', async () => {

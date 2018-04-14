@@ -1,6 +1,8 @@
 require('dotenv').config();
 const express = require('express');
-const { getRates, getSymbols } = require('./lib/fixer-service');
+const bodyParser = require('body-parser');
+
+const { getRates, getSymbols, convertCurrency } = require('./lib/fixer-service');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -8,8 +10,17 @@ const port = process.env.PORT || 3000;
 // Set public folder as root
 app.use(express.static('public'));
 
+// Parse POST data as URL encoded data
+app.use(bodyParser.urlencoded({
+  extended: true,
+}));
+
+// Parse POST data as JSON
+app.use(bodyParser.json());
+
 // Provide access to node_modules folder
 app.use('/scripts', express.static(`${__dirname}/node_modules/`));
+
 
 const errorHandler = (err, req, res) => {
   if (err.response) {
@@ -36,10 +47,22 @@ app.get('/api/rates', async (req, res) => {
   }
 });
 
-// Symbols
+// Fetch Symbols
 app.get('/api/symbols', async (req, res) => {
   try {
     const data = await getSymbols();
+    res.setHeader('Content-Type', 'application/json');
+    res.send(data);
+  } catch (error) {
+    errorHandler(error, req, res);
+  }
+});
+
+// Convert Currency
+app.post('/api/convert', async (req, res) => {
+  try {
+    const { from, to, amount } = req.body;
+    const data = await convertCurrency(from, to, amount);
     res.setHeader('Content-Type', 'application/json');
     res.send(data);
   } catch (error) {
