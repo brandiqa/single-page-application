@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="scripts/semantic-ui-css/semantic.min.css">
+  <link rel="stylesheet" href="scripts/semantic-ui-calendar/dist/calendar.min.css">
   <title>SPA Demo</title>
 </head>
 <body>
@@ -121,9 +122,43 @@
       </div>
     </script>
 
-    <script id="historical-template" type="text/x-handlebars-template">
+    <script id="historical-form-template" type="text/x-handlebars-template">
       <h1 class="ui header">Historical Rates</h1>
       <hr>
+      <div class="ui form">
+        <div class="field">
+          <label>Pick Date</label>
+          <div class="ui calendar" id="calendar">
+            <div class="ui input left icon">
+              <i class="calendar icon"></i>
+              <input type="text" placeholder="Date" id="date">
+            </div>
+          </div>
+        </div>
+        <button class="ui right floated primary button">Fetch Rates</button>
+      </div>
+      <div class="ui basic segment">
+        <div id="historical-table"></div>
+      </div>
+    </script>
+
+    <script id="historical-table-template" type="text/x-handlebars-template">
+     <table class="ui table">
+      <thead>
+        <tr>
+          <th>Code</th>
+          <th>Rate</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each rates}}
+        <tr>
+          <td>{{@key}}</td>
+          <td>{{this}}</td>
+        </tr>
+        {{/each}}
+      </tbody>
+     </table>
     </script>
 
     <!-- Page content -->
@@ -132,6 +167,7 @@
     <!-- Scripts -->
     <script src="scripts/jquery/dist/jquery.min.js"></script>
     <script src="scripts/semantic-ui-css/semantic.min.js"></script>
+    <script src="scripts/semantic-ui-calendar/dist/calendar.min.js"></script>
     <script src="scripts/axios/dist/axios.min.js"></script>
     <script src="scripts/handlebars/dist/handlebars.min.js"></script>
     <script src="scripts/vanilla-router/dist/vanilla-router.min.js"></script>

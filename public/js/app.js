@@ -5,7 +5,7 @@ window.addEventListener('load', () => {
   const errorTemplate = Handlebars.compile($('#error-template').html());
   const ratesTemplate = Handlebars.compile($('#rates-template').html());
   const exchangeTemplate = Handlebars.compile($('#exchange-template').html());
-  const historicalTemplate = Handlebars.compile($('#historical-template').html());
+  const historicalFormTemplate = Handlebars.compile($('#historical-form-template').html());
 
   // Instantiate api handler
   const api = axios.create({
@@ -106,8 +106,12 @@ window.addEventListener('load', () => {
   });
 
   router.add('/historical', () => {
-    const html = historicalTemplate();
+    const html = historicalFormTemplate();
     el.html(html);
+    // Activate Date Picker
+    $('#calendar').calendar({
+      type: 'date',
+    });
   });
 
   router.navigateTo(window.location.pathname);
