@@ -6,6 +6,7 @@ window.addEventListener('load', () => {
   const ratesTemplate = Handlebars.compile($('#rates-template').html());
   const exchangeTemplate = Handlebars.compile($('#exchange-template').html());
   const historicalFormTemplate = Handlebars.compile($('#historical-form-template').html());
+  const historicalTableTemplate = Handlebars.compile($('#historical-table-template').html());
 
   // Instantiate api handler
   const api = axios.create({
@@ -105,11 +106,27 @@ window.addEventListener('load', () => {
     }
   });
 
+  const getHistoricalRates = async () => {
+    const date = $('#date').val();
+    try {
+      const response = await api.post('/historical', { date });
+      const { base, rates } = response.data;
+      const html = historicalTableTemplate({ base, date, rates });
+      $('#historical-table').html(html);
+    } catch (error) {
+      showError(error);
+    } finally {
+      $('.segment').removeClass('loading');
+    }
+  };
+
   const historicalRatesHandler = () => {
     if ($('.ui.form').form('is valid')) {
       // hide error message
       $('.ui.error.message').hide();
-      const date = $('#date').val();
+      // Indicate loading status
+      $('.segment').addClass('loading');
+      getHistoricalRates();
       // Prevent page from submitting to server
       return false;
     }

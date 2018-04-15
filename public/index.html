@@ -47,7 +47,7 @@
       <div class="ui loading basic segment">
         <div class="ui horizontal list">
           <div class="item">
-            <i class="money calendar alternate outline icon"></i>
+            <i class="calendar alternate outline icon"></i>
             <div class="content">
               <div class="ui sub header">Date</div>
               <span>{{date}}</span>
@@ -145,22 +145,38 @@
     </script>
 
     <script id="historical-table-template" type="text/x-handlebars-template">
-     <table class="ui table">
-      <thead>
-        <tr>
-          <th>Code</th>
-          <th>Rate</th>
-        </tr>
-      </thead>
-      <tbody>
-        {{#each rates}}
-        <tr>
-          <td>{{@key}}</td>
-          <td>{{this}}</td>
-        </tr>
-        {{/each}}
-      </tbody>
-     </table>
+      <div class="ui horizontal list">
+        <div class="item">
+          <i class="calendar alternate outline icon"></i>
+          <div class="content">
+            <div class="ui sub header">Date</div>
+            <span>{{date}}</span>
+          </div>
+        </div>
+        <div class="item">
+          <i class="money bill alternate outline icon"></i>
+          <div class="content">
+            <div class="ui sub header">Base</div>
+            <span>{{base}}</span>
+          </div>
+        </div>
+      </div>
+      <table class="ui table">
+        <thead>
+          <tr>
+            <th>Code</th>
+            <th>Rate</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each rates}}
+          <tr>
+            <td>{{@key}}</td>
+            <td>{{this}}</td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
     </script>
 
     <!-- Page content -->
