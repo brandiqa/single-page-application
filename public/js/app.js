@@ -105,13 +105,33 @@ window.addEventListener('load', () => {
     }
   });
 
+  const historicalRatesHandler = () => {
+    if ($('.ui.form').form('is valid')) {
+      // hide error message
+      $('.ui.error.message').hide();
+      const date = $('#date').val();
+      // Prevent page from submitting to server
+      return false;
+    }
+    return true;
+  };
+
   router.add('/historical', () => {
     const html = historicalFormTemplate();
     el.html(html);
     // Activate Date Picker
     $('#calendar').calendar({
       type: 'date',
+      formatter: {
+        date: date => new Date(date).toISOString().split('T')[0],
+      },
     });
+    $('.ui.form').form({
+      fields: {
+        date: 'empty',
+      },
+    });
+    $('.submit').click(historicalRatesHandler);
   });
 
   router.navigateTo(window.location.pathname);

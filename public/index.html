@@ -110,7 +110,7 @@
               <input type="number" name="amount" id="amount" placeholder="Enter amount">
             </div>
           </div>
-          <div class="ui primary right aligned submit button">Convert</div>
+          <div class="ui primary submit button">Convert</div>
           <div class="ui error message"></div>
         </form>
         <br>
@@ -125,7 +125,7 @@
     <script id="historical-form-template" type="text/x-handlebars-template">
       <h1 class="ui header">Historical Rates</h1>
       <hr>
-      <div class="ui form">
+      <form class="ui form">
         <div class="field">
           <label>Pick Date</label>
           <div class="ui calendar" id="calendar">
@@ -135,8 +135,10 @@
             </div>
           </div>
         </div>
-        <button class="ui right floated primary button">Fetch Rates</button>
-      </div>
+        <div class="ui primary submit button">Fetch Rates</div>
+        <div class="ui error message"></div>
+      </form>
+
       <div class="ui basic segment">
         <div id="historical-table"></div>
       </div>

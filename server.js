@@ -82,7 +82,6 @@ app.post('/api/historical', async (req, res) => {
   }
 });
 
-
 // Redirect all traffic to index.html
 app.use((req, res) => res.sendFile(`${__dirname}/public/index.html`));
 
