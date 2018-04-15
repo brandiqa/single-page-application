@@ -34,14 +34,16 @@ window.addEventListener('load', () => {
 
   router.add('/', async () => {
     // Display loader first
-    el.html(loaderTemplate({ pageTitle: 'Currency Rates' }));
+    let html = ratesTemplate();
+    el.html(html);
     try {
       // Load Currency Rates
       const response = await api.get('/rates');
       const { base, date, rates } = response.data;
       // Display Rates Table
-      const html = ratesTemplate({ base, date, rates });
+      html = ratesTemplate({ base, date, rates });
       el.html(html);
+      $('.loading').removeClass('loading');
     } catch (error) {
       showError(error);
     }
