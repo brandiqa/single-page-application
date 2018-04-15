@@ -3,7 +3,6 @@ window.addEventListener('load', () => {
 
   // Compile Handlebar Templates
   const errorTemplate = Handlebars.compile($('#error-template').html());
-  const loaderTemplate = Handlebars.compile($('#loader-template').html());
   const ratesTemplate = Handlebars.compile($('#rates-template').html());
   const exchangeTemplate = Handlebars.compile($('#exchange-template').html());
   const historicalTemplate = Handlebars.compile($('#historical-template').html());
@@ -82,13 +81,15 @@ window.addEventListener('load', () => {
 
   router.add('/exchange', async () => {
     // Display loader first
-    el.html(loaderTemplate({ pageTitle: 'Exchange Rates' }));
+    let html = exchangeTemplate();
+    el.html(html);
     try {
       // Load Symbols
       const response = await api.get('/symbols');
       const { symbols } = response.data;
-      const html = exchangeTemplate({ symbols });
+      html = exchangeTemplate({ symbols });
       el.html(html);
+      $('.loading').removeClass('loading');
       // Specify Form Validation Rules
       $('.ui.form').form({
         fields: {

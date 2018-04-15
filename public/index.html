@@ -39,18 +39,6 @@
       </div>
     </script>
 
-    <!-- Loader Template -->
-    <script id="loader-template" type="text/x-handlebars-template">
-      <h1 class="ui header">{{pageTitle}}</h1>
-      <hr>
-      <div class="ui segment" style="height:350px">
-        <p></p>
-        <div class="ui active dimmer">
-          <div class="ui text loader">Loading</div>
-        </div>
-      </div>
-    </script>
-
     <!-- Currency Rates Template -->
     <script id="rates-template" type="text/x-handlebars-template">
       <h1 class="ui header">Currency Rates</h1>
@@ -95,40 +83,41 @@
     <script id="exchange-template" type="text/x-handlebars-template">
       <h1 class="ui header">Exchange Rate</h1>
       <hr>
-      <br>
-      <form class="ui form">
-        <div class="three fields">
-          <div class="field">
-            <label>From</label>
-            <select class="ui dropdown" name="from" id="from">
-              <option value="">Select Currency</option>
+      <div class="ui basic loading segment">
+        <form class="ui form">
+          <div class="three fields">
+            <div class="field">
+              <label>From</label>
+              <select class="ui dropdown" name="from" id="from">
+                <option value="">Select Currency</option>
                 {{#each symbols}}
-                  <option value="{{@key}}">{{this}}</option>
+                <option value="{{@key}}">{{this}}</option>
                 {{/each}}
-            </select>
-          </div>
-          <div class="field">
-            <label>To</label>
-            <select class="ui dropdown" name="to" id="to">
-              <option value="">Select Currency</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>To</label>
+              <select class="ui dropdown" name="to" id="to">
+                <option value="">Select Currency</option>
                 {{#each symbols}}
-                  <option value="{{@key}}">{{this}}</option>
+                <option value="{{@key}}">{{this}}</option>
                 {{/each}}
-            </select>
+              </select>
+            </div>
+            <div class="field">
+              <label>Amount</label>
+              <input type="number" name="amount" id="amount" placeholder="Enter amount">
+            </div>
           </div>
-          <div class="field">
-            <label>Amount</label>
-            <input type="number" name="amount" id="amount" placeholder="Enter amount">
-          </div>
+          <div class="ui primary right aligned submit button">Convert</div>
+          <div class="ui error message"></div>
+        </form>
+        <br>
+        <div id="result-segment" class="ui center aligned segment">
+          <h2 id="result" class="ui header">
+            0.00
+          </h2>
         </div>
-        <div class="ui primary right aligned submit button">Convert</div>
-        <div class="ui error message"></div>
-      </form>
-      <br>
-      <div id="result-segment" class="ui center aligned segment">
-        <h2 id="result" class="ui header">
-          0.00
-        </h2>
       </div>
     </script>
 
