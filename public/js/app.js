@@ -5,8 +5,7 @@ window.addEventListener('load', () => {
   const errorTemplate = Handlebars.compile($('#error-template').html());
   const ratesTemplate = Handlebars.compile($('#rates-template').html());
   const exchangeTemplate = Handlebars.compile($('#exchange-template').html());
-  const historicalFormTemplate = Handlebars.compile($('#historical-form-template').html());
-  const historicalTableTemplate = Handlebars.compile($('#historical-table-template').html());
+  const historicalTemplate = Handlebars.compile($('#historical-template').html());
 
   // Instantiate api handler
   const api = axios.create({
@@ -26,12 +25,14 @@ window.addEventListener('load', () => {
     },
   });
 
+  // Display Error Banner
   const showError = (error) => {
     const { title, message } = error.response.data;
     const html = errorTemplate({ color: 'red', title, message });
     el.html(html);
   };
 
+  // Display Latest Currency Rates
   router.add('/', async () => {
     // Display loader first
     let html = ratesTemplate();
@@ -49,6 +50,7 @@ window.addEventListener('load', () => {
     }
   });
 
+  // Perform POST request, calculate and display conversion results
   const getConversionResults = async () => {
     // Extract form data
     const from = $('#from').val();
@@ -67,6 +69,7 @@ window.addEventListener('load', () => {
     }
   };
 
+  // Handle Convert Button Click Event
   const convertRatesHandler = () => {
     if ($('.ui.form').form('is valid')) {
       // hide error message
@@ -111,7 +114,7 @@ window.addEventListener('load', () => {
     try {
       const response = await api.post('/historical', { date });
       const { base, rates } = response.data;
-      const html = historicalTableTemplate({ base, date, rates });
+      const html = ratesTemplate({ base, date, rates });
       $('#historical-table').html(html);
     } catch (error) {
       showError(error);
@@ -134,7 +137,7 @@ window.addEventListener('load', () => {
   };
 
   router.add('/historical', () => {
-    const html = historicalFormTemplate();
+    const html = historicalTemplate();
     el.html(html);
     // Activate Date Picker
     $('#calendar').calendar({
