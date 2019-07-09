@@ -8,7 +8,7 @@ The main libraries used here are:
 
 - [jQuery](https://jquery.com/) : DOM Handler
 - [Handlebars](https://handlebarsjs.com/) : Templates Library
-- [Vanilla Router](https://github.com/Graidenix/vanilla-router) - Clint-side routing
+- [Vanilla Router](https://github.com/Graidenix/vanilla-router) - Client-side routing
 
 The tutorial for this demo is on [Sitepoint.com](https://www.sitepoint.com/single-page-app-without-framework/).
 This application consumes data provided by [Fixer.io](https://fixer.io) and [Currency Converter API](https://www.currencyconverterapi.com).
