@@ -1,6 +1,8 @@
 # Single Page Application Demo
 
-This is a demo project for beginners showing them how to build a Single Page Application without using a popular framework such as React, Angular, Vue, Ember or Backbone.js.
+## Introduction
+
+This is a demo project for beginners showing them how to build a Single Page Application without using a popular framework such as React, Angular, Vue.js, Ember or Backbone.js.
 
 The main libraries used here are:
 
@@ -8,8 +10,37 @@ The main libraries used here are:
 - [Handlebars](https://handlebarsjs.com/) : Templates Library
 - [Vanilla Router](https://github.com/Graidenix/vanilla-router) - Clint-side routing
 
-You can find the tutorial this demo comes with on [Sitepoint](https://www.sitepoint.com).
-This application consumes data provided by [Fixer.io](https://fixer.io).
+The tutorial for this demo is on [Sitepoint.com](https://www.sitepoint.com/single-page-app-without-framework/).
+This application consumes data provided by [Fixer.io](https://fixer.io) and [Currency Converter API](https://www.currencyconverterapi.com).
+
+## ATTENTION!! Bug Fixes on 9th July 2019
+
+A number of fixes were implemented on 9th July 2019 to make the project features working again. Below is a breakdown:
+
+### 1. NPM Audit
+
+All packages were upgraded to their latest versions as of 9th July 2019. Hence all security vulnerabilities found in package dependencies have been patched.
+
+### 2. Fixer API Endpoint
+
+The Fixer API Endpoint now requires the API key to be appended at the end of the URL. See [docs](https://fixer.io/documentation). Here is an example:
+
+```html
+https://data.fixer.io/api/latest
+    ? access_key = API_KEY
+```
+
+See [fixer-service.js](https://github.com/brandiqa/single-page-application/blob/master/lib/fixer-service.js) to see what has changed.
+
+### 3. Currency Converter API
+
+The Currency Converter API endpoint has changed numerous items since this project was first created. See [docs](https://www.currencyconverterapi.com/docs). Below is a quick summary:
+
+1. The new URL to be used for free access is `https://free.currconv.com`
+2. The API has been upgraded from v5 to v7 : `/api/v7/`
+3. An API key is now required to access the free service. Register one with your email address from this [link](https://free.currencyconverterapi.com/free-api-key)
+
+See [fixer-currency-service.js](https://github.com/brandiqa/single-page-application/blob/master/lib/free-currency-service.js) to see what has changed.
 
 ## Requirements
 
@@ -17,10 +48,11 @@ This application consumes data provided by [Fixer.io](https://fixer.io).
 
 ## Installation Steps
 
-You'll need to register an [account](https://fixer.io/signup/free) with fixer.io in order to access their **Free API Key**. After you have cloned the repository, create a new file called `.env` at the root of the project. Provide your api key inside the file like this:
+You'll need to register an [account](https://fixer.io/signup/free) with fixer.io in order to access their **Free API Key**. You'll also need to register with [Currency Converter API](https://free.currencyconverterapi.com/free-api-key) to get their **Free API Key** too.  After you have cloned the repository, create a new file called `.env` at the root of the project. Provide your API keys inside the file like this:
 
 ```env
-API_KEY=<insert api access key here>
+API_KEY=<insert api access key from fixer here>
+CONVERTER_API_KEY=<insert api access key from Currency Converter here>
 PORT=3000
 TIMEOUT=5000
 ```

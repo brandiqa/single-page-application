@@ -11,14 +11,14 @@
   "author": "Michael Wanyoike",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.18.0",
-    "body-parser": "^1.18.2",
-    "dotenv": "^5.0.1",
-    "express": "^4.16.3",
-    "handlebars": "^4.0.11",
-    "jquery": "^3.3.1",
+    "axios": "^0.19.0",
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.0.0",
+    "express": "^4.17.1",
+    "handlebars": "^4.1.2",
+    "jquery": "^3.4.1",
     "semantic-ui-calendar": "0.0.8",
-    "semantic-ui-css": "^2.3.1",
-    "vanilla-router": "^1.2.6"
+    "semantic-ui-css": "^2.4.1",
+    "vanilla-router": "^1.2.7"
   }
 }
